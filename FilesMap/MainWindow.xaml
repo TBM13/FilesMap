@@ -1,0 +1,15 @@
+﻿<Window x:Class="FilesMap.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="FilesMap" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid Background="#FFF3F3F3">
+        <ScrollViewer x:Name="Tiles_Scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,28">
+            <Grid x:Name="TilesContent"/>
+        </ScrollViewer>
+        <TextBox x:Name="Textbox_Path" Height="26" VerticalAlignment="Bottom" Margin="1,0,106,1" VerticalContentAlignment="Center"/>
+        <Button Content="Navigate" Height="26" VerticalAlignment="Bottom" Margin="0,0,1,1" HorizontalAlignment="Right" Width="101" Click="Button_Click"/>
+    </Grid>
+</Window>
