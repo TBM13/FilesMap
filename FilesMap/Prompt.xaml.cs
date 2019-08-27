@@ -37,7 +37,7 @@ namespace FilesMap
 
             string driveSeparator = Settings.Default.DriveSeparator;
 
-            string[] a = new TextRange(Rtxt_Data.Document.ContentStart, Rtxt_Data.Document.ContentEnd).Text.Split(new[]{ Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+            string[] a = new TextRange(Rtxt_Data.Document.ContentStart, Rtxt_Data.Document.ContentEnd).Text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             if (a.Length < 1)
             {
                 MessageBox.Show("Data can't be null.", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Exclamation);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,6 +20,7 @@ namespace FilesMap
         private int column = 0;
 
         private string currentPath;
+        private StringCollection previousPath = new StringCollection();
 
         public MainWindow() => InitializeComponent();
 
@@ -114,10 +116,12 @@ namespace FilesMap
             tilesCount = 0;
         }
 
-        public void Navigate(string _path)
+        public void Navigate(string _path, bool goBack = false)
         {
             try
             {
+                if (goBack) previousPath.RemoveAt(previousPath.Count - 1);
+
                 string dirSeparator = Settings.Default.DirSeparator;
 
                 ClearTiles();
@@ -131,8 +135,23 @@ namespace FilesMap
                         AddTile(elem);
                     }
                 }
-                currentPath = _path;
+
+                if (!goBack && currentPath != null && _path != currentPath)
+                {
+                    if (previousPath.Count > 0)
+                    {
+                        if (previousPath[previousPath.Count - 1] != currentPath) previousPath.Add(currentPath);
+                    }
+                    else
+                    {
+                        previousPath.Add(currentPath);
+                    }
+                }
+
                 Textbox_Path.Text = _path;
+                currentPath = _path;
+
+                Btn_Back.IsEnabled = previousPath.Count > 0;
             }
             catch (Exception e)
             {
@@ -168,6 +187,8 @@ namespace FilesMap
             return elemIcon;
         }
 
-        private bool HasIcon(string extension) => extension == "DIR" || extension == "AVI" || extension == "CSS" || extension == "DLL" || extension == "DOC" || extension == "DOCX" ||  extension == "EXE" || extension == "HTML" || extension == "ISO" || extension == "JPG" || extension == "JPEG" || extension == "JS" || extension == "JSON" || extension == "MP3" || extension == "MP4" || extension == "PDF" || extension == "PNG" || extension == "PSD" || extension == "RTF" || extension == "SVG" || extension == "TXT" || extension == "XML" || extension == "ZIP" || extension == "7Z" || extension == "RAR" || extension == "TAR" || extension == "INI";
+        private bool HasIcon(string extension) => extension == "DIR" || extension == "AVI" || extension == "CSS" || extension == "DLL" || extension == "DOC" || extension == "DOCX" || extension == "EXE" || extension == "HTML" || extension == "ISO" || extension == "JPG" || extension == "JPEG" || extension == "JS" || extension == "JSON" || extension == "MP3" || extension == "MP4" || extension == "PDF" || extension == "PNG" || extension == "PSD" || extension == "RTF" || extension == "SVG" || extension == "TXT" || extension == "XML" || extension == "ZIP" || extension == "7Z" || extension == "RAR" || extension == "TAR" || extension == "INI";
+
+        private void Btn_Back_Click(object sender, RoutedEventArgs e) => Navigate(previousPath[previousPath.Count - 1], true);
     }
 }
