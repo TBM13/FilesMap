@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace FilesMap
 {
@@ -54,7 +55,7 @@ namespace FilesMap
             int b = 90 * column;
 
             string name = _path.Remove(0, _path.LastIndexOf("\\") + 1);
-            string extension = _path.Contains(".") ? _path.Remove(0, _path.LastIndexOf(".") + 1) : "";
+            string extension = _path.Contains(".") ? _path.Remove(0, _path.LastIndexOf(".") + 1) : "dir";
 
             Grid tileBackground = new Grid
             {
@@ -72,7 +73,7 @@ namespace FilesMap
                 Height = 48,
                 VerticalAlignment = VerticalAlignment.Top,
                 HorizontalAlignment = HorizontalAlignment.Left,
-                //Source = GetFileIcon(extension),
+                Source = GetFileIcon(extension.ToUpper()),
                 Margin = new Thickness(8, 0, 0, 0)
             };
 
@@ -131,7 +132,7 @@ namespace FilesMap
             }
             catch (Exception e)
             {
-                MessageBox.Show("Se ha producido un error:\n" + e.ToString(), "FilesMap", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("An error has occurred:\n" + e.ToString(), "FilesMap", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -143,8 +144,26 @@ namespace FilesMap
 
         private void TileMouseEnter(object sender, MouseEventArgs e, Grid tileBackground) => tileBackground.Background = Brushes.LightBlue;
         private void TileMouseLeave(object sender, MouseEventArgs e, Grid tileBackground) => tileBackground.Background = Brushes.Transparent;
-
-        private void Button_Click(object sender, RoutedEventArgs e) => Navigate(Textbox_Path.Text);
 #pragma warning restore IDE0060
+
+        private void Button_Click(object sender, RoutedEventArgs e) => Navigate(Textbox_Path.Text.Length > 0 ? Textbox_Path.Text : "C:");
+
+        private BitmapImage GetFileIcon(string extension)
+        {
+            if (extension == "7Z" || extension == "RAR" || extension == "TAR")
+                extension = "zip";
+            else if (extension.ToUpper() == "JPEG")
+                extension = "jpg";
+            else if (extension.ToUpper() == "DOCX")
+                extension = "doc";
+
+            BitmapImage elemIcon = new BitmapImage();
+            elemIcon.BeginInit();
+            elemIcon.UriSource = HasIcon(extension.ToUpper()) ? new Uri("pack://application:,,,/Images/" + extension.ToLower() + "64.png", UriKind.Absolute) : new Uri("pack://application:,,,/Images/file64.png", UriKind.Absolute);
+            elemIcon.EndInit();
+            return elemIcon;
+        }
+
+        private bool HasIcon(string extension) => extension == "DIR" || extension == "AVI" || extension == "CSS" || extension == "DLL" || extension == "DOC" || extension == "DOCX" ||  extension == "EXE" || extension == "HTML" || extension == "ISO" || extension == "JPG" || extension == "JPEG" || extension == "JS" || extension == "JSON" || extension == "MP3" || extension == "MP4" || extension == "PDF" || extension == "PNG" || extension == "PSD" || extension == "RTF" || extension == "SVG" || extension == "TXT" || extension == "XML" || extension == "ZIP" || extension == "7Z" || extension == "RAR" || extension == "TAR" || extension == "INI";
     }
 }

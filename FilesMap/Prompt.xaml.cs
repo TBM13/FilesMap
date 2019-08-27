@@ -26,8 +26,19 @@ namespace FilesMap
                 MessageBox.Show("Data can't be null.", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
+
+            string drive = "C:";
+            foreach (string element in a)
+            {
+                if (element.Contains(":"))
+                {
+                    drive = element.Remove(element.IndexOf(":") + 1, element.Length - element.IndexOf(":") - 1);
+                    break;
+                }
+            }
+
             Main.data = a;
-            Main.Navigate("C:\\");
+            Main.Navigate(drive);
             manualClose = false;
             Close();
         }

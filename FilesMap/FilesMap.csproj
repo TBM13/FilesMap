@@ -41,6 +41,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -104,6 +105,35 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dir64.png" />
+    <Resource Include="Images\dll64.png" />
+    <Resource Include="Images\exe64.png" />
+    <Resource Include="Images\file64.png" />
+    <Resource Include="Images\png64.png" />
+    <Resource Include="Images\txt64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\avi64.png" />
+    <Resource Include="Images\css64.png" />
+    <Resource Include="Images\doc64.png" />
+    <Resource Include="Images\html64.png" />
+    <Resource Include="Images\iso64.png" />
+    <Resource Include="Images\jpg64.png" />
+    <Resource Include="Images\js64.png" />
+    <Resource Include="Images\json64.png" />
+    <Resource Include="Images\mp364.png" />
+    <Resource Include="Images\mp464.png" />
+    <Resource Include="Images\pdf64.png" />
+    <Resource Include="Images\psd64.png" />
+    <Resource Include="Images\rtf64.png" />
+    <Resource Include="Images\svg64.png" />
+    <Resource Include="Images\xml64.png" />
+    <Resource Include="Images\zip64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ini64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
