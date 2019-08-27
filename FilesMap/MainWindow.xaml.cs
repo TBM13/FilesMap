@@ -4,12 +4,14 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using FilesMap.Properties;
 
 namespace FilesMap
 {
     public partial class MainWindow : Window
     {
         public string[] data;
+        public string defaultDrive;
 
         private double previousWidth = 0;
 
@@ -54,8 +56,8 @@ namespace FilesMap
             int a = 10 + (80 * tilesCount);
             int b = 90 * column;
 
-            string name = _path.Remove(0, _path.LastIndexOf("\\") + 1);
-            string extension = _path.Contains(".") ? _path.Remove(0, _path.LastIndexOf(".") + 1) : "dir";
+            string name = _path.Remove(0, _path.LastIndexOf(Settings.Default.DirSeparator) + 1);
+            string extension = _path.Contains(Settings.Default.FileExtSeparator) ? _path.Remove(0, _path.LastIndexOf(Settings.Default.FileExtSeparator) + 1) : "dir";
 
             Grid tileBackground = new Grid
             {
@@ -116,13 +118,15 @@ namespace FilesMap
         {
             try
             {
+                string dirSeparator = Settings.Default.DirSeparator;
+
                 ClearTiles();
                 foreach (string element in data)
                 {
                     string elem = element;
-                    if (elem.Substring(elem.Length - 1) == "\\") elem = elem.Remove(elem.Length - 1, 1);
-                    if (_path.Substring(_path.Length - 1) != "\\") _path += "\\";
-                    if (elem.Contains(_path) && elem.Length - elem.Replace("\\", "").Length == _path.Length - _path.Replace("\\", "").Length)
+                    if (elem.Substring(elem.Length - 1) == dirSeparator) elem = elem.Remove(elem.Length - 1, 1);
+                    if (_path.Substring(_path.Length - 1) != dirSeparator) _path += dirSeparator;
+                    if (elem.Contains(_path) && elem.Length - elem.Replace(dirSeparator, "").Length == _path.Length - _path.Replace(dirSeparator, "").Length)
                     {
                         AddTile(elem);
                     }
@@ -139,14 +143,14 @@ namespace FilesMap
 #pragma warning disable IDE0060
         private void TileMouseUp(object sender, MouseButtonEventArgs e, Image tile, string _path)
         {
-            if (e.ChangedButton == MouseButton.Left && !_path.Contains(".")) Navigate(_path);
+            if (e.ChangedButton == MouseButton.Left && !_path.Contains(Settings.Default.FileExtSeparator)) Navigate(_path);
         }
 
         private void TileMouseEnter(object sender, MouseEventArgs e, Grid tileBackground) => tileBackground.Background = Brushes.LightBlue;
         private void TileMouseLeave(object sender, MouseEventArgs e, Grid tileBackground) => tileBackground.Background = Brushes.Transparent;
 #pragma warning restore IDE0060
 
-        private void Button_Click(object sender, RoutedEventArgs e) => Navigate(Textbox_Path.Text.Length > 0 ? Textbox_Path.Text : "C:");
+        private void Button_Click(object sender, RoutedEventArgs e) => Navigate(Textbox_Path.Text.Length > 0 ? Textbox_Path.Text : defaultDrive);
 
         private BitmapImage GetFileIcon(string extension)
         {

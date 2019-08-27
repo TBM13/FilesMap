@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Documents;
+using FilesMap.Properties;
 
 namespace FilesMap
 {
@@ -20,27 +21,56 @@ namespace FilesMap
 
         private void Btn_OK_Click(object sender, RoutedEventArgs e)
         {
-            string[] a = new TextRange(Rtxt_Data.Document.ContentStart, Rtxt_Data.Document.ContentEnd).Text.Replace("/", "\\").Split(new[]{ Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+            if (Btn_OK.Content.ToString() == "Save")
+            {
+                Grid_Settings.Visibility = Visibility.Hidden;
+                if (Txt_DriveSeparator.Text.Length > 0) Settings.Default.DriveSeparator = Txt_DriveSeparator.Text;
+                if (Txt_DirSeparator.Text.Length > 0) Settings.Default.DirSeparator = Txt_DirSeparator.Text;
+                if (Txt_FileExtSeparator.Text.Length > 0) Settings.Default.FileExtSeparator = Txt_FileExtSeparator.Text;
+                Settings.Default.Save();
+                Btn_Settings.Visibility = Visibility.Visible;
+                Rtxt_Data.Visibility = Visibility.Visible;
+                Lbl_Title.Content = "Insert data:";
+                Btn_OK.Content = "OK";
+                return;
+            }
+
+            string driveSeparator = Settings.Default.DriveSeparator;
+
+            string[] a = new TextRange(Rtxt_Data.Document.ContentStart, Rtxt_Data.Document.ContentEnd).Text.Split(new[]{ Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
             if (a.Length < 1)
             {
                 MessageBox.Show("Data can't be null.", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 
-            string drive = "C:";
+            string drive = "C" + driveSeparator;
             foreach (string element in a)
             {
-                if (element.Contains(":"))
+                if (element.Contains(driveSeparator))
                 {
-                    drive = element.Remove(element.IndexOf(":") + 1, element.Length - element.IndexOf(":") - 1);
+                    drive = element.Remove(element.IndexOf(driveSeparator) + 1, element.Length - element.IndexOf(driveSeparator) - 1);
                     break;
                 }
             }
 
             Main.data = a;
+            Main.defaultDrive = drive;
             Main.Navigate(drive);
             manualClose = false;
             Close();
+        }
+
+        private void Btn_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            Btn_Settings.Visibility = Visibility.Hidden;
+            Rtxt_Data.Visibility = Visibility.Hidden;
+            Lbl_Title.Content = "Settings";
+            Btn_OK.Content = "Save";
+            Txt_DriveSeparator.Text = Settings.Default.DriveSeparator;
+            Txt_DirSeparator.Text = Settings.Default.DirSeparator;
+            Txt_FileExtSeparator.Text = Settings.Default.FileExtSeparator;
+            Grid_Settings.Visibility = Visibility.Visible;
         }
     }
 }

@@ -6,8 +6,17 @@
         mc:Ignorable="d"
         Title="FilesMap" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
-        <Label Content="Insert data:" VerticalAlignment="Top" HorizontalContentAlignment="Center" Height="31" VerticalContentAlignment="Center" FontSize="16"/>
+        <Label x:Name="Lbl_Title" Content="Insert data:" VerticalAlignment="Top" HorizontalContentAlignment="Center" Height="31" VerticalContentAlignment="Center" FontSize="16"/>
         <RichTextBox x:Name="Rtxt_Data" Margin="5,31" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
-        <Button x:Name="Btn_OK" Content="OK" Margin="0,0,10,3" HorizontalAlignment="Right" Width="75" Height="25" VerticalAlignment="Bottom" Click="Btn_OK_Click"/>
+        <Button x:Name="Btn_OK" Content="OK" Margin="0,0,5,3" HorizontalAlignment="Right" Width="75" Height="25" VerticalAlignment="Bottom" Click="Btn_OK_Click"/>
+        <Button x:Name="Btn_Settings" Content="Settings" Margin="5,0,0,3" HorizontalAlignment="Left" Width="109" Height="25" VerticalAlignment="Bottom" Click="Btn_Settings_Click"/>
+        <Grid Visibility="Hidden" x:Name="Grid_Settings" Margin="10,36,10,28">
+            <Label Content="Drive Separator:" Margin="4,5,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="95"/>
+            <TextBox x:Name="Txt_DriveSeparator" TextWrapping="NoWrap" Margin="6,33,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
+            <Label Content="Directory Separator:" Margin="4,61,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
+            <TextBox x:Name="Txt_DirSeparator" TextWrapping="NoWrap" Margin="6,89,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
+            <Label Content="File Extension Separator:" Margin="4,117,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="139"/>
+            <TextBox x:Name="Txt_FileExtSeparator" TextWrapping="NoWrap" Margin="6,145,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
+        </Grid>
     </Grid>
 </Window>
