@@ -165,7 +165,7 @@ namespace FilesMap
             if (e.ChangedButton == MouseButton.Left && !_path.Contains(Settings.Default.FileExtSeparator)) Navigate(_path);
         }
 
-        private void TileMouseEnter(object sender, MouseEventArgs e, Grid tileBackground) => tileBackground.Background = Brushes.LightBlue;
+        private void TileMouseEnter(object sender, MouseEventArgs e, Grid tileBackground) => tileBackground.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#e3f1ff");
         private void TileMouseLeave(object sender, MouseEventArgs e, Grid tileBackground) => tileBackground.Background = Brushes.Transparent;
 #pragma warning restore IDE0060
 
@@ -175,10 +175,12 @@ namespace FilesMap
         {
             if (extension == "7Z" || extension == "RAR" || extension == "TAR")
                 extension = "zip";
-            else if (extension.ToUpper() == "JPEG")
+            else if (extension == "JPEG")
                 extension = "jpg";
-            else if (extension.ToUpper() == "DOCX")
+            else if (extension == "DOCX")
                 extension = "doc";
+            else if (extension == "SH" || extension == "CMD")
+                extension = "bat";
 
             BitmapImage elemIcon = new BitmapImage();
             elemIcon.BeginInit();
@@ -187,7 +189,7 @@ namespace FilesMap
             return elemIcon;
         }
 
-        private bool HasIcon(string extension) => extension == "DIR" || extension == "AVI" || extension == "CSS" || extension == "DLL" || extension == "DOC" || extension == "DOCX" || extension == "EXE" || extension == "HTML" || extension == "ISO" || extension == "JPG" || extension == "JPEG" || extension == "JS" || extension == "JSON" || extension == "MP3" || extension == "MP4" || extension == "PDF" || extension == "PNG" || extension == "PSD" || extension == "RTF" || extension == "SVG" || extension == "TXT" || extension == "XML" || extension == "ZIP" || extension == "7Z" || extension == "RAR" || extension == "TAR" || extension == "INI";
+        private bool HasIcon(string extension) => extension == "DIR" || extension == "AVI" || extension == "CSS" || extension == "DLL" || extension == "DOC" || extension == "DOCX" || extension == "EXE" || extension == "HTML" || extension == "ISO" || extension == "JPG" || extension == "JPEG" || extension == "JS" || extension == "JSON" || extension == "MP3" || extension == "MP4" || extension == "PDF" || extension == "PNG" || extension == "PSD" || extension == "RTF" || extension == "SVG" || extension == "TXT" || extension == "XML" || extension == "ZIP" || extension == "7Z" || extension == "RAR" || extension == "TAR" || extension == "INI" || extension == "JAR" || extension == "BAT" || extension == "SH" || extension == "CMD" || extension == "GIF";
 
         private void Btn_Back_Click(object sender, RoutedEventArgs e) => Navigate(previousPath[previousPath.Count - 1], true);
     }

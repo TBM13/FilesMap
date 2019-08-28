@@ -11,6 +11,6 @@
         </ScrollViewer>
         <TextBox x:Name="Textbox_Path" Height="26" VerticalAlignment="Bottom" Margin="71,0,106,1" VerticalContentAlignment="Center"/>
         <Button Content="Navigate" Height="26" VerticalAlignment="Bottom" Margin="0,0,1,1" HorizontalAlignment="Right" Width="101" Click="Button_Click"/>
-        <Button x:Name="Btn_Back" Content="Volver" Height="26" VerticalAlignment="Bottom" Margin="1,0,0,1" HorizontalAlignment="Left" Width="65" IsEnabled="False" Click="Btn_Back_Click"/>
+        <Button x:Name="Btn_Back" Content="Back" Height="26" VerticalAlignment="Bottom" Margin="2,0,0,1" HorizontalAlignment="Left" Width="66" IsEnabled="False" Click="Btn_Back_Click"/>
     </Grid>
 </Window>

@@ -135,5 +135,14 @@
   <ItemGroup>
     <Resource Include="Images\ini64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\jar64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bat64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\gif64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
