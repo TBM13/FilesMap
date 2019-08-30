@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Documents;
+using Microsoft.Win32;
 using FilesMap.Properties;
 
 namespace FilesMap
@@ -10,6 +12,8 @@ namespace FilesMap
         private readonly MainWindow Main;
 
         private bool manualClose = true;
+
+        private string forceInterpretData = "";
 
         public Prompt(MainWindow mainW)
         {
@@ -56,6 +60,7 @@ namespace FilesMap
 
             Main.data = a;
             Main.defaultDrive = drive;
+            Main.forceInterpret = forceInterpretData;
             Main.Navigate(drive);
             manualClose = false;
             Close();
@@ -71,6 +76,23 @@ namespace FilesMap
             Txt_DirSeparator.Text = Settings.Default.DirSeparator;
             Txt_FileExtSeparator.Text = Settings.Default.FileExtSeparator;
             Grid_Settings.Visibility = Visibility.Visible;
+        }
+
+        private void Btn_ImportForceInterpretData_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog OFD = new OpenFileDialog
+            {
+                Title = "Import interpret as a file/folder data",
+                RestoreDirectory = true,
+                Filter = "Text files|*.txt|All files|*.*",
+                DefaultExt = "txt"
+            };
+
+            if (OFD.ShowDialog() == true)
+            {
+                forceInterpretData = File.ReadAllText(OFD.FileName);
+                MessageBox.Show("Success!", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

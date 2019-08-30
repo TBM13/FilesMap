@@ -24,7 +24,7 @@ namespace FilesMap
         private string currentPath;
         private readonly StringCollection previousPath = new StringCollection();
 
-        private string forceInterpret = "";
+        public string forceInterpret = "";
 
         public MainWindow() => InitializeComponent();
 

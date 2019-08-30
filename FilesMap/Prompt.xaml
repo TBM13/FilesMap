@@ -17,6 +17,7 @@
             <TextBox x:Name="Txt_DirSeparator" TextWrapping="NoWrap" Margin="6,89,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
             <Label Content="File Extension Separator:" Margin="4,117,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="139"/>
             <TextBox x:Name="Txt_FileExtSeparator" TextWrapping="NoWrap" Margin="6,145,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
+            <Button x:Name="Btn_ImportForceInterpretData" Content="Import interpret as a file/folder data" Margin="0,5,1,0" HorizontalAlignment="Right" Width="206" Height="25" VerticalAlignment="Top" Click="Btn_ImportForceInterpretData_Click"/>
         </Grid>
     </Grid>
 </Window>
