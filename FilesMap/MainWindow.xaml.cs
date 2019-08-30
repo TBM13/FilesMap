@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 using FilesMap.Properties;
 
 namespace FilesMap
@@ -222,8 +224,24 @@ namespace FilesMap
             else
                 forceInterpret += _path + ";";
 
+            Menu_ExportInterpretData.IsEnabled = forceInterpret.Length > 0;
+
             ClearTiles();
             Navigate(currentPath);
+        }
+
+        private void Menu_ExportInterpretData_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog SFD = new SaveFileDialog
+            {
+                Title = "Export interpret as a file/folder data",
+                RestoreDirectory = true,
+                Filter = "Text files|*.txt|All files|*.*",
+                DefaultExt = "txt"
+            };
+
+            if (SFD.ShowDialog() == true)
+                File.WriteAllText(SFD.FileName, forceInterpret);
         }
     }
 }
