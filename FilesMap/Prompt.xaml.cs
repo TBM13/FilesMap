@@ -27,6 +27,12 @@ namespace FilesMap
         {
             if (Btn_OK.Content.ToString() == "Save")
             {
+                if (Txt_DriveSeparator.Text == Txt_DirSeparator.Text || Txt_DriveSeparator.Text == Txt_FileExtSeparator.Text || Txt_FileExtSeparator.Text == Txt_DirSeparator.Text)
+                {
+                    MessageBox.Show("A separator value can't be the same than another one.", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
+
                 Grid_Settings.Visibility = Visibility.Hidden;
                 if (Txt_DriveSeparator.Text.Length > 0) Settings.Default.DriveSeparator = Txt_DriveSeparator.Text;
                 if (Txt_DirSeparator.Text.Length > 0) Settings.Default.DirSeparator = Txt_DirSeparator.Text;
