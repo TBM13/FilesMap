@@ -61,7 +61,7 @@ namespace FilesMap
             int b = 90 * column;
 
             string name = _path.Remove(0, _path.LastIndexOf(Settings.Default.DirSeparator) + 1);
-            string extension = _path.Contains(Settings.Default.FileExtSeparator) ? _path.Remove(0, _path.LastIndexOf(Settings.Default.FileExtSeparator) + 1).ToUpper() : "DIR";
+            string extension = _path.Remove(0, _path.LastIndexOf(Settings.Default.DirSeparator)).Contains(Settings.Default.FileExtSeparator) ? _path.Remove(0, _path.LastIndexOf(Settings.Default.FileExtSeparator) + 1).ToUpper() : "DIR";
 
             ContextMenu contextMenu = new ContextMenu();
 
