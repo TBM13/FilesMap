@@ -26,6 +26,8 @@ namespace FilesMap
 
         public string forceInterpret = "";
 
+        private bool clickedOnGrid;
+
         public MainWindow() => InitializeComponent();
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => Environment.Exit(0);
@@ -243,5 +245,58 @@ namespace FilesMap
             if (SFD.ShowDialog() == true)
                 File.WriteAllText(SFD.FileName, forceInterpret);
         }
+
+        private void Menu_CreateElement_Click(object sender, RoutedEventArgs e)
+        {
+            Txt_CreateElement_Name.Clear();
+            Grid_CreateElement.Visibility = Visibility.Visible;
+            Grid_BlurEffect.Radius = 2;
+        }
+
+        private void Grid_CreateElement_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!clickedOnGrid)
+            {
+                Grid_CreateElement.Visibility = Visibility.Hidden;
+                Grid_BlurEffect.Radius = 0;
+            }
+
+            clickedOnGrid = false;
+        }
+
+        private void Grid_CreateElement2_MouseDown(object sender, MouseButtonEventArgs e) => clickedOnGrid = true;
+
+        private void Btn_CreateElement_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Grid_CreateElement.Visibility = Visibility.Hidden;
+            Grid_BlurEffect.Radius = 0;
+        }
+
+        //This is here to prevent grid from closing when right click is pressed on Txt_CreateElement_Name
+        private void Txt_CreateElement_Name_MouseLeave(object sender, MouseEventArgs e) => clickedOnGrid = false;
+        private void Txt_CreateElement_Name_MouseEnter(object sender, MouseEventArgs e) => clickedOnGrid = true;
+
+        private void Btn_CreateElement_Create_Click(object sender, RoutedEventArgs e)
+        {
+            string newElementPath = currentPath + Txt_CreateElement_Name.Text;
+
+            foreach (string element in data)
+            {
+                if (element == newElementPath)
+                {
+                    MessageBox.Show("The element '" + Txt_CreateElement_Name.Text + "' already exists in this path.", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
+
+            Array.Resize(ref data, data.Length + 1);
+            data[data.Length - 1] = newElementPath;
+            AddTile(newElementPath);
+
+            Grid_CreateElement.Visibility = Visibility.Hidden;
+            Grid_BlurEffect.Radius = 0;
+        }
+
+        private void Txt_CreateElement_Name_TextChanged(object sender, TextChangedEventArgs e) => Btn_CreateElement_Create.IsEnabled = Txt_CreateElement_Name.Text.Length > 0;
     }
 }

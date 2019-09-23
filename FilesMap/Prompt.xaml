@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="FilesMap" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
-        <Label x:Name="Lbl_Title" Content="Insert data:" VerticalAlignment="Top" HorizontalContentAlignment="Center" Height="31" VerticalContentAlignment="Center" FontSize="16"/>
+        <Label x:Name="Lbl_Title" Content="Insert data" VerticalAlignment="Top" HorizontalContentAlignment="Center" Height="31" VerticalContentAlignment="Center" FontSize="16"/>
         <RichTextBox x:Name="Rtxt_Data" Margin="5,31" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
         <Button x:Name="Btn_OK" Content="OK" Margin="0,0,5,3" HorizontalAlignment="Right" Width="75" Height="25" VerticalAlignment="Bottom" Click="Btn_OK_Click"/>
         <Button x:Name="Btn_Settings" Content="Settings" Margin="5,0,0,3" HorizontalAlignment="Left" Width="109" Height="25" VerticalAlignment="Bottom" Click="Btn_Settings_Click"/>
@@ -19,6 +19,7 @@
             <Label Content="File Extension Separator:" Margin="4,117,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="139"/>
             <TextBox x:Name="Txt_FileExtSeparator" TextWrapping="NoWrap" Margin="6,145,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
             <Button x:Name="Btn_ImportForceInterpretData" Content="Import interpret as a file/folder data" Margin="0,5,1,0" HorizontalAlignment="Right" Width="206" Height="25" VerticalAlignment="Top" Click="Btn_ImportForceInterpretData_Click"/>
+            <Label x:Name="Lbl_ForceInterpretData" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,31,0,0" HorizontalContentAlignment="Center" Width="207" Height="36"/>
         </Grid>
     </Grid>
 </Window>
