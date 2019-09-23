@@ -39,6 +39,7 @@ namespace FilesMap
                 if (Txt_FileExtSeparator.Text.Length > 0) Settings.Default.FileExtSeparator = Txt_FileExtSeparator.Text;
                 Settings.Default.Save();
                 Btn_Settings.Visibility = Visibility.Visible;
+                Btn_Import.Visibility = Visibility.Visible;
                 Rtxt_Data.Visibility = Visibility.Visible;
                 Lbl_Title.Content = "Insert data:";
                 Btn_OK.Content = "OK";
@@ -75,6 +76,7 @@ namespace FilesMap
         private void Btn_Settings_Click(object sender, RoutedEventArgs e)
         {
             Btn_Settings.Visibility = Visibility.Hidden;
+            Btn_Import.Visibility = Visibility.Hidden;
             Rtxt_Data.Visibility = Visibility.Hidden;
             Lbl_Title.Content = "Settings";
             Btn_OK.Content = "Save";
@@ -86,19 +88,41 @@ namespace FilesMap
 
         private void Btn_ImportForceInterpretData_Click(object sender, RoutedEventArgs e)
         {
+            string file = ShowOpenDialog("Import interpret as a file/folder data");
+
+            if (file.Length > 0)
+            {
+                forceInterpretData = File.ReadAllText(file);
+                MessageBox.Show("Success!", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void Btn_Import_Click(object sender, RoutedEventArgs e)
+        {
+            string file = ShowOpenDialog("Import data");
+
+            if (file.Length > 0)
+            {
+                Rtxt_Data.Document.Blocks.Clear();
+                string fileData = File.ReadAllText(file);
+                foreach (string line in new LineReader(() => new StringReader(fileData)))
+                {
+                    Rtxt_Data.Document.Blocks.Add(new Paragraph(new Run(line)));
+                }
+            }
+        }
+
+        private string ShowOpenDialog(string title)
+        {
             OpenFileDialog OFD = new OpenFileDialog
             {
-                Title = "Import interpret as a file/folder data",
+                Title = title,
                 RestoreDirectory = true,
                 Filter = "Text files|*.txt|All files|*.*",
                 DefaultExt = "txt"
             };
 
-            if (OFD.ShowDialog() == true)
-            {
-                forceInterpretData = File.ReadAllText(OFD.FileName);
-                MessageBox.Show("Success!", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            return OFD.ShowDialog() == true ? OFD.FileName : "";
         }
     }
 }
