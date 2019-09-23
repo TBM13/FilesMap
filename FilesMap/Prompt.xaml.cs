@@ -93,7 +93,6 @@ namespace FilesMap
             if (file.Length > 0)
             {
                 forceInterpretData = File.ReadAllText(file);
-                MessageBox.Show("Success!", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Information);
                 string fileName = file.Remove(0, file.LastIndexOf("\\") + 1);
                 Lbl_ForceInterpretData.Content = "Using " + (fileName.Length > 25 ? fileName.Remove(24) + "..." : fileName);
             }

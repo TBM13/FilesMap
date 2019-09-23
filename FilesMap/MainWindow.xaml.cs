@@ -246,6 +246,28 @@ namespace FilesMap
                 File.WriteAllText(SFD.FileName, forceInterpret);
         }
 
+        private void Menu_ExportData_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog SFD = new SaveFileDialog
+            {
+                Title = "Export data",
+                RestoreDirectory = true,
+                Filter = "Text files|*.txt|All files|*.*",
+                DefaultExt = "txt"
+            };
+
+            if (SFD.ShowDialog() == true)
+            {
+                string a = "";
+                foreach (string element in data)
+                {
+                    a += element + "\n";
+                }
+
+                File.WriteAllText(SFD.FileName, a);
+            }
+        }
+
         private void Menu_CreateElement_Click(object sender, RoutedEventArgs e)
         {
             Txt_CreateElement_Name.Clear();
