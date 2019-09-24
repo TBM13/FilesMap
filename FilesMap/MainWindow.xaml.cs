@@ -245,7 +245,7 @@ namespace FilesMap
             return elemIcon;
         }
 
-        private bool HasIcon(string extension) => extension == "DIR" || extension == "AVI" || extension == "CSS" || extension == "DLL" || extension == "DOC" || extension == "DOCX" || extension == "EXE" || extension == "HTML" || extension == "ISO" || extension == "JPG" || extension == "JPEG" || extension == "JS" || extension == "JSON" || extension == "MP3" || extension == "MP4" || extension == "PDF" || extension == "PNG" || extension == "PSD" || extension == "RTF" || extension == "SVG" || extension == "TXT" || extension == "XML" || extension == "ZIP" || extension == "7Z" || extension == "RAR" || extension == "TAR" || extension == "INI" || extension == "JAR" || extension == "BAT" || extension == "SH" || extension == "CMD" || extension == "GIF";
+        private bool HasIcon(string extension) => extension == "DIR" || extension == "AVI" || extension == "CSS" || extension == "DLL" || extension == "DOC" || extension == "DOCX" || extension == "EXE" || extension == "HTML" || extension == "ISO" || extension == "JPG" || extension == "JPEG" || extension == "JS" || extension == "JSON" || extension == "MP3" || extension == "MP4" || extension == "PDF" || extension == "PNG" || extension == "PSD" || extension == "RTF" || extension == "SVG" || extension == "TXT" || extension == "XML" || extension == "ZIP" || extension == "7Z" || extension == "RAR" || extension == "TAR" || extension == "INI" || extension == "JAR" || extension == "BAT" || extension == "SH" || extension == "CMD" || extension == "GIF" || extension == "LNK";
 
         private void Btn_Back_Click(object sender, RoutedEventArgs e) => Navigate(previousPath[previousPath.Count - 1], true);
 
