@@ -219,7 +219,7 @@ namespace FilesMap
 
         private void Button_Click(object sender, RoutedEventArgs e) => Navigate(Textbox_Path.Text.Length > 0 ? Textbox_Path.Text : defaultDrive);
 
-        private BitmapImage GetFileIcon(string extension, string _path)
+        private BitmapImage GetFileIcon(string extension, string _path = "")
         {
             if (extension == "7Z" || extension == "RAR" || extension == "TAR")
                 extension = "zip";
@@ -230,7 +230,8 @@ namespace FilesMap
             else if (extension == "SH" || extension == "CMD")
                 extension = "bat";
 
-            if (forceInterpret.Contains(_path + ";")) extension = extension == "DIR" ? "" : "dir";
+            if (_path.Length > 0 && forceInterpret.Contains(_path + ";"))
+                extension = extension == "DIR" ? "" : "dir";
 
             BitmapImage elemIcon = new BitmapImage();
             elemIcon.BeginInit();
@@ -353,6 +354,18 @@ namespace FilesMap
             Grid_BlurEffect.Radius = 0;
         }
 
-        private void Txt_CreateElement_Name_TextChanged(object sender, TextChangedEventArgs e) => Btn_CreateElement_Create.IsEnabled = Txt_CreateElement_Name.Text.Length > 0;
+        private void Txt_CreateElement_Name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Btn_CreateElement_Create.IsEnabled = Txt_CreateElement_Name.Text.Length > 0;
+
+            string extension = "DIR";
+            if (Txt_CreateElement_Name.Text.Contains(Settings.Default.FileExtSeparator))
+            {
+                extension = Txt_CreateElement_Name.Text.ToUpper().Remove(0, Txt_CreateElement_Name.Text.LastIndexOf(Settings.Default.FileExtSeparator) + 1);
+                if (extension == "DIR") extension = "NULL";
+            }
+
+            Image_CreateElement_Icon.Source = GetFileIcon(extension); 
+        }
     }
 }

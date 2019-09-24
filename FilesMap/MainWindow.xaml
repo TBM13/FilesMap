@@ -36,6 +36,7 @@
                 <TextBox x:Name="Txt_CreateElement_Name" Margin="10,31,10,0" Height="23" VerticalAlignment="Top" VerticalContentAlignment="Center" MouseEnter="Txt_CreateElement_Name_MouseEnter" MouseLeave="Txt_CreateElement_Name_MouseLeave" TextChanged="Txt_CreateElement_Name_TextChanged"/>
                 <Button x:Name="Btn_CreateElement_Create" Content="Create" HorizontalAlignment="Right" Margin="0,0,10,5" VerticalAlignment="Bottom" Width="75" Height="25" Click="Btn_CreateElement_Create_Click" IsEnabled="False" IsDefault="True"/>
                 <Button x:Name="Btn_CreateElement_Cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,90,5" VerticalAlignment="Bottom" Width="75" Height="25" Click="Btn_CreateElement_Cancel_Click"/>
+                <Image x:Name="Image_CreateElement_Icon" Width="32" Height="32" Source="pack://application:,,,/Images/dir64.png" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,5"/>
             </Grid>
         </Grid>
     </Grid>
