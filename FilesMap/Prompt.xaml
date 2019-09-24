@@ -12,14 +12,15 @@
         <Button x:Name="Btn_Settings" Content="Settings" Margin="5,0,0,3" HorizontalAlignment="Left" Width="109" Height="25" VerticalAlignment="Bottom" Click="Btn_Settings_Click"/>
         <Button x:Name="Btn_Import" Content="Import data" Margin="119,0,0,3" HorizontalAlignment="Left" Width="109" Height="25" VerticalAlignment="Bottom" Click="Btn_Import_Click"/>
         <Grid Visibility="Hidden" x:Name="Grid_Settings" Margin="10,36,10,28">
-            <Label Content="Drive Separator:" Margin="4,5,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="95"/>
+            <Label Content="Drive Separator:" Margin="6,5,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="95"/>
             <TextBox x:Name="Txt_DriveSeparator" TextWrapping="NoWrap" Margin="6,33,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
-            <Label Content="Directory Separator:" Margin="4,61,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
+            <Label Content="Directory Separator:" Margin="6,61,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
             <TextBox x:Name="Txt_DirSeparator" TextWrapping="NoWrap" Margin="6,89,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
-            <Label Content="File Extension Separator:" Margin="4,117,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="139"/>
+            <Label Content="File Extension Separator:" Margin="6,117,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="139"/>
             <TextBox x:Name="Txt_FileExtSeparator" TextWrapping="NoWrap" Margin="6,145,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
             <Button x:Name="Btn_ImportForceInterpretData" Content="Import interpret as a file/folder data" Margin="0,5,1,0" HorizontalAlignment="Right" Width="206" Height="25" VerticalAlignment="Top" Click="Btn_ImportForceInterpretData_Click"/>
             <Label x:Name="Lbl_ForceInterpretData" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,31,0,0" HorizontalContentAlignment="Center" Width="207" Height="36"/>
+            <CheckBox x:Name="CheckBox_DeleteConfirmation" Content="Ask confirmation to delete elements" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="6,180,0,0" Checked="CheckBox_DeleteConfirmation_CheckedChanged" Unchecked="CheckBox_DeleteConfirmation_CheckedChanged"/>
         </Grid>
     </Grid>
 </Window>

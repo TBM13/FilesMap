@@ -83,6 +83,7 @@ namespace FilesMap
             Txt_DriveSeparator.Text = Settings.Default.DriveSeparator;
             Txt_DirSeparator.Text = Settings.Default.DirSeparator;
             Txt_FileExtSeparator.Text = Settings.Default.FileExtSeparator;
+            CheckBox_DeleteConfirmation.IsChecked = Settings.Default.deleteConfirmation;
             Grid_Settings.Visibility = Visibility.Visible;
         }
 
@@ -125,5 +126,7 @@ namespace FilesMap
 
             return OFD.ShowDialog() == true ? OFD.FileName : "";
         }
+
+        private void CheckBox_DeleteConfirmation_CheckedChanged(object sender, RoutedEventArgs e) => Settings.Default.deleteConfirmation = CheckBox_DeleteConfirmation.IsChecked == true;
     }
 }

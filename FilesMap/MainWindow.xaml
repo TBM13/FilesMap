@@ -17,14 +17,14 @@
         <Button Content="Navigate" Height="26" VerticalAlignment="Bottom" Margin="0,0,1,1" HorizontalAlignment="Right" Width="101" Click="Button_Click"/>
         <Button x:Name="Btn_Back" Content="Back" Height="26" VerticalAlignment="Bottom" Margin="2,0,0,1" HorizontalAlignment="Left" Width="66" IsEnabled="False" Click="Btn_Back_Click"/>
         <Grid.ContextMenu>
-            <ContextMenu>
+            <ContextMenu Opened="ContextMenu_Opened">
                 <MenuItem x:Name="Menu_CreateElement" Header="Create element" Click="Menu_CreateElement_Click"/>
                 <Separator/>
-                    <MenuItem Header="Export...">
-                        <MenuItem x:Name="Menu_ExportData" Header="Data" Click="Menu_ExportData_Click"/>
-                        <MenuItem x:Name="Menu_ExportInterpretData" Header="Interpret as a file/folder data" Click="Menu_ExportInterpretData_Click" IsEnabled="False"/>
-                    </MenuItem>
-                </ContextMenu>
+                <MenuItem Header="Export...">
+                    <MenuItem x:Name="Menu_ExportData" Header="Data" Click="Menu_ExportData_Click"/>
+                    <MenuItem x:Name="Menu_ExportInterpretData" Header="Interpret as a file/folder data" Click="Menu_ExportInterpretData_Click" IsEnabled="False"/>
+                </MenuItem>
+            </ContextMenu>
         </Grid.ContextMenu>
     </Grid>
     <Grid x:Name="Grid_CreateElement" Background="#26000000" MouseUp="Grid_CreateElement_MouseUp" MinHeight="419" Visibility="Hidden">

@@ -69,6 +69,13 @@ namespace FilesMap
 
             ContextMenu contextMenu = new ContextMenu();
 
+            MenuItem deleteElement = new MenuItem
+            {
+                Header = "Delete"
+            };
+
+            Separator separator = new Separator();
+
             MenuItem interpretAsAFolder = new MenuItem
             {
                 Header = "Interpret as a folder"
@@ -118,8 +125,25 @@ namespace FilesMap
 
             while (formmatedText.Width > tileText.Width && tileBackground.Height < 80) tileBackground.Height += 5;
 
+            contextMenu.Items.Add(deleteElement);
+            contextMenu.Items.Add(separator);
             contextMenu.Items.Add(tile.Source.ToString() == "pack://application:,,,/Images/dir64.png" ? interpretAsAFile : interpretAsAFolder);
 
+            deleteElement.Click += (sender2, e2) =>
+            {
+                if (!Settings.Default.deleteConfirmation || MessageBox.Show("Are you sure that you want to delete this element?", "FilesMap", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    for (int i = 0; i < data.Length; i++)
+                    {
+                        if (data[i] == _path)
+                        {
+                            data[i] = data[data.Length - 1];
+                            Array.Resize(ref data, data.Length - 1);
+                            Navigate(currentPath);
+                        }
+                    }
+                }
+            };
             interpretAsAFolder.Click += (sender2, e2) => ForceInterpret(_path);
             interpretAsAFile.Click += (sender2, e2) => ForceInterpret(_path);
 
@@ -226,11 +250,11 @@ namespace FilesMap
             else
                 forceInterpret += _path + ";";
 
-            Menu_ExportInterpretData.IsEnabled = forceInterpret.Length > 0;
-
             ClearTiles();
             Navigate(currentPath);
         }
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e) => Menu_ExportInterpretData.IsEnabled = forceInterpret.Length > 0;
 
         private void Menu_ExportInterpretData_Click(object sender, RoutedEventArgs e)
         {
