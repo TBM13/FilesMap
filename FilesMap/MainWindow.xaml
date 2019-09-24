@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="FilesMap" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
-    <Grid>
+    <Grid UseLayoutRounding="True">
         <Grid>
             <Grid.Effect>
                 <BlurEffect x:Name="Grid_BlurEffect" Radius="0"/>
@@ -30,11 +30,11 @@
     <Grid x:Name="Grid_CreateElement" Background="#26000000" MouseUp="Grid_CreateElement_MouseUp" MinHeight="419" Visibility="Hidden">
             <Grid Background="#FFF7F7F7" Margin="158,124,158,197" MaxHeight="98" MaxWidth="476" MouseDown="Grid_CreateElement2_MouseDown">
                 <Grid.Effect>
-                    <DropShadowEffect Opacity="0.15" BlurRadius="20"/>
+                    <DropShadowEffect x:Name="Grid_CreateElement_Shadow" Opacity="0.15" BlurRadius="20"/>
                 </Grid.Effect>
                 <Label Content="Element name:" VerticalAlignment="Top" Margin="10,2,10,0"/>
                 <TextBox x:Name="Txt_CreateElement_Name" Margin="10,31,10,0" Height="23" VerticalAlignment="Top" VerticalContentAlignment="Center" MouseEnter="Txt_CreateElement_Name_MouseEnter" MouseLeave="Txt_CreateElement_Name_MouseLeave" TextChanged="Txt_CreateElement_Name_TextChanged"/>
-                <Button x:Name="Btn_CreateElement_Create" Content="Create" HorizontalAlignment="Right" Margin="0,0,10,5" VerticalAlignment="Bottom" Width="75" Height="25" Click="Btn_CreateElement_Create_Click" IsEnabled="False"/>
+                <Button x:Name="Btn_CreateElement_Create" Content="Create" HorizontalAlignment="Right" Margin="0,0,10,5" VerticalAlignment="Bottom" Width="75" Height="25" Click="Btn_CreateElement_Create_Click" IsEnabled="False" IsDefault="True"/>
                 <Button x:Name="Btn_CreateElement_Cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,90,5" VerticalAlignment="Bottom" Width="75" Height="25" Click="Btn_CreateElement_Cancel_Click"/>
             </Grid>
         </Grid>

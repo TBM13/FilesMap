@@ -62,12 +62,24 @@ namespace FilesMap.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool deleteConfirmation {
+        public bool DeleteConfirmation {
             get {
-                return ((bool)(this["deleteConfirmation"]));
+                return ((bool)(this["DeleteConfirmation"]));
             }
             set {
-                this["deleteConfirmation"] = value;
+                this["DeleteConfirmation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableEffects {
+            get {
+                return ((bool)(this["EnableEffects"]));
+            }
+            set {
+                this["EnableEffects"] = value;
             }
         }
     }

@@ -131,7 +131,7 @@ namespace FilesMap
 
             deleteElement.Click += (sender2, e2) =>
             {
-                if (!Settings.Default.deleteConfirmation || MessageBox.Show("Are you sure that you want to delete this element?", "FilesMap", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (!Settings.Default.DeleteConfirmation || MessageBox.Show("Are you sure that you want to delete this element?", "FilesMap", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     for (int i = 0; i < data.Length; i++)
                     {
@@ -296,7 +296,11 @@ namespace FilesMap
         {
             Txt_CreateElement_Name.Clear();
             Grid_CreateElement.Visibility = Visibility.Visible;
-            Grid_BlurEffect.Radius = 2;
+            Txt_CreateElement_Name.Focus();
+            if (Settings.Default.EnableEffects)
+                Grid_BlurEffect.Radius = 2;
+            else
+                Grid_CreateElement_Shadow.Opacity = 0;
         }
 
         private void Grid_CreateElement_MouseUp(object sender, MouseButtonEventArgs e)
@@ -324,6 +328,12 @@ namespace FilesMap
 
         private void Btn_CreateElement_Create_Click(object sender, RoutedEventArgs e)
         {
+            if (Txt_CreateElement_Name.Text.Contains(Settings.Default.DirSeparator) || Txt_CreateElement_Name.Text.Contains(Settings.Default.DriveSeparator))
+            {
+                MessageBox.Show($"The element name can't contain these characters:\n{Settings.Default.DirSeparator}  {Settings.Default.DriveSeparator}", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             string newElementPath = currentPath + Txt_CreateElement_Name.Text;
 
             foreach (string element in data)

@@ -11,7 +11,10 @@
     <Setting Name="FileExtSeparator" Type="System.String" Scope="User">
       <Value Profile="(Default)">.</Value>
     </Setting>
-    <Setting Name="deleteConfirmation" Type="System.Boolean" Scope="User">
+    <Setting Name="DeleteConfirmation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnableEffects" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
