@@ -28,6 +28,8 @@ namespace FilesMap
 
         private bool clickedOnGrid;
 
+        private string elementToRename;
+
         public MainWindow() => InitializeComponent();
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => Environment.Exit(0);
@@ -77,6 +79,11 @@ namespace FilesMap
             MenuItem deleteElement = new MenuItem
             {
                 Header = "Delete"
+            };
+
+            MenuItem renameElement = new MenuItem
+            {
+                Header = "Rename"
             };
 
             Separator separator = new Separator();
@@ -131,6 +138,7 @@ namespace FilesMap
             while (formmatedText.Width > tileText.Width && tileBackground.Height < 80) tileBackground.Height += 5;
 
             contextMenu.Items.Add(deleteElement);
+            contextMenu.Items.Add(renameElement);
             contextMenu.Items.Add(separator);
             contextMenu.Items.Add(tile.Source.ToString() == "pack://application:,,,/Images/dir64.png" ? interpretAsAFile : interpretAsAFolder);
 
@@ -145,10 +153,25 @@ namespace FilesMap
                             data[i] = data[data.Length - 1];
                             Array.Resize(ref data, data.Length - 1);
                             Navigate(currentPath);
+                            break;
                         }
                     }
                 }
             };
+
+            renameElement.Click += (sender2, e2) =>
+            {
+                elementToRename = _path;
+                Btn_CreateElement_Create.Content = "Rename";
+                Txt_CreateElement_Name.Text = name;
+                Grid_CreateElement.Visibility = Visibility.Visible;
+                Txt_CreateElement_Name.Focus();
+                if (Settings.Default.EnableEffects)
+                    Grid_BlurEffect.Radius = 2;
+                else
+                    Grid_CreateElement_Shadow.Opacity = 0;
+            };
+
             interpretAsAFolder.Click += (sender2, e2) => ForceInterpret(_path);
             interpretAsAFile.Click += (sender2, e2) => ForceInterpret(_path);
 
@@ -300,6 +323,7 @@ namespace FilesMap
 
         private void Menu_CreateElement_Click(object sender, RoutedEventArgs e)
         {
+            Btn_CreateElement_Create.Content = "Create";
             Txt_CreateElement_Name.Clear();
             Grid_CreateElement.Visibility = Visibility.Visible;
             Txt_CreateElement_Name.Focus();
@@ -351,9 +375,24 @@ namespace FilesMap
                 }
             }
 
-            Array.Resize(ref data, data.Length + 1);
-            data[data.Length - 1] = newElementPath;
-            AddTile(newElementPath);
+            if (Btn_CreateElement_Create.Content.ToString() == "Create")
+            {
+                Array.Resize(ref data, data.Length + 1);
+                data[data.Length - 1] = newElementPath;
+                AddTile(newElementPath);
+            }
+            else
+            {
+                for (int i = 0; i < data.Length; i++)
+                {
+                    if (data[i] == elementToRename)
+                    {
+                        data[i] = newElementPath;
+                        Navigate(currentPath);
+                        break;
+                    }
+                }
+            }
 
             Grid_CreateElement.Visibility = Visibility.Hidden;
             Grid_BlurEffect.Radius = 0;
