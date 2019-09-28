@@ -13,8 +13,8 @@ namespace FilesMap
 {
     public partial class MainWindow : Window
     {
-        public string[] data;
-        public string defaultDrive;
+        private string[] data;
+        private string defaultDrive;
 
         private double previousWidth = 0;
 
@@ -24,17 +24,24 @@ namespace FilesMap
         private string currentPath;
         private readonly StringCollection previousPath = new StringCollection();
 
-        public string forceInterpret = "";
+        private string forceInterpret = "";
 
         private bool clickedOnGrid;
 
         private string elementToRename;
 
-        public MainWindow() => InitializeComponent();
+        public MainWindow(string[] _data, string _defaultDrive, string _forceInterpret)
+        {
+            InitializeComponent();
+
+            data = _data;
+            defaultDrive = _defaultDrive;
+            forceInterpret = _forceInterpret;
+
+            SizeChanged += Window_SizeChanged;
+        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => Environment.Exit(0);
-
-        private void Window_Loaded(object sender, RoutedEventArgs e) => ShowPrompt();
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -44,15 +51,6 @@ namespace FilesMap
                 previousWidth = a;
                 Navigate(currentPath);
             }
-        }
-
-        private void ShowPrompt()
-        {
-            Visibility = Visibility.Hidden;
-            Prompt prompt = new Prompt(this);
-            if (prompt.ShowDialog() != true || data.Length == 0) Environment.Exit(0);
-            SizeChanged += Window_SizeChanged;
-            Visibility = Visibility.Visible;
         }
 
         private void AddTile(string _path)

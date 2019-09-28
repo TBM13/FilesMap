@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="FilesMap" Height="450" Width="800" Closing="Window_Closing">
+        Title="FilesMap" Height="450" Width="800">
     <Grid>
         <Label x:Name="Lbl_Title" Content="Insert data" VerticalAlignment="Top" HorizontalContentAlignment="Center" Height="31" VerticalContentAlignment="Center" FontSize="16"/>
         <RichTextBox x:Name="Rtxt_Data" Margin="5,31" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>

@@ -9,19 +9,9 @@ namespace FilesMap
 {
     public partial class Prompt : Window
     {
-        private readonly MainWindow Main;
-
-        private bool manualClose = true;
-
         private string forceInterpretData = "";
 
-        public Prompt(MainWindow mainW)
-        {
-            InitializeComponent();
-            Main = mainW;
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => DialogResult = !manualClose;
+        public Prompt() => InitializeComponent();
 
         private void Btn_OK_Click(object sender, RoutedEventArgs e)
         {
@@ -65,11 +55,9 @@ namespace FilesMap
                 }
             }
 
-            Main.data = a;
-            Main.defaultDrive = drive;
-            Main.forceInterpret = forceInterpretData;
-            Main.Navigate(drive);
-            manualClose = false;
+            MainWindow main = new MainWindow(a, drive, forceInterpretData);
+            main.Navigate(drive);
+            main.Show();
             Close();
         }
 
