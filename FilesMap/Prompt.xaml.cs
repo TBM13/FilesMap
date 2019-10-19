@@ -38,7 +38,7 @@ namespace FilesMap
 
             string driveSeparator = Settings.Default.DriveSeparator;
 
-            string[] a = new TextRange(Rtxt_Data.Document.ContentStart, Rtxt_Data.Document.ContentEnd).Text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string[] a = new TextRange(Rtxt_Data.Document.ContentStart, Rtxt_Data.Document.ContentEnd).Text.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
             if (a.Length < 1)
             {
                 MessageBox.Show("Data can't be null.", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -96,10 +96,7 @@ namespace FilesMap
             {
                 Rtxt_Data.Document.Blocks.Clear();
                 string fileData = File.ReadAllText(file);
-                foreach (string line in new LineReader(() => new StringReader(fileData)))
-                {
-                    Rtxt_Data.Document.Blocks.Add(new Paragraph(new Run(line)));
-                }
+                Rtxt_Data.Document.Blocks.Add(new Paragraph(new Run(fileData)));
             }
         }
 
