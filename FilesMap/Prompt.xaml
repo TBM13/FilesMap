@@ -7,7 +7,13 @@
         Title="FilesMap" Height="450" Width="800">
     <Grid>
         <Label x:Name="Lbl_Title" Content="Insert data" VerticalAlignment="Top" HorizontalContentAlignment="Center" Height="31" VerticalContentAlignment="Center" FontSize="16"/>
-        <RichTextBox x:Name="Rtxt_Data" Margin="5,31" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+        <RichTextBox x:Name="Rtxt_Data" Margin="5,31" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </RichTextBox.Resources>
+        </RichTextBox>
         <Button x:Name="Btn_OK" Content="OK" Margin="0,0,5,3" HorizontalAlignment="Right" Width="75" Height="25" VerticalAlignment="Bottom" Click="Btn_OK_Click"/>
         <Button x:Name="Btn_Settings" Content="Settings" Margin="5,0,0,3" HorizontalAlignment="Left" Width="109" Height="25" VerticalAlignment="Bottom" Click="Btn_Settings_Click"/>
         <Button x:Name="Btn_Import" Content="Import data" Margin="119,0,0,3" HorizontalAlignment="Left" Width="109" Height="25" VerticalAlignment="Bottom" Click="Btn_Import_Click"/>

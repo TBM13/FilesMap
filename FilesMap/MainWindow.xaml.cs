@@ -285,29 +285,17 @@ namespace FilesMap
 
         private void Menu_ExportInterpretData_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog SFD = new SaveFileDialog
-            {
-                Title = "Export interpret as a file/folder data",
-                RestoreDirectory = true,
-                Filter = "Text files|*.txt|All files|*.*",
-                DefaultExt = "txt"
-            };
+            string fileName = ShowSaveDialog("Export interpret as a file/folder data");
 
-            if (SFD.ShowDialog() == true)
-                File.WriteAllText(SFD.FileName, forceInterpret);
+            if (fileName.Length > 0)
+                File.WriteAllText(fileName, forceInterpret);
         }
 
         private void Menu_ExportData_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog SFD = new SaveFileDialog
-            {
-                Title = "Export data",
-                RestoreDirectory = true,
-                Filter = "Text files|*.txt|All files|*.*",
-                DefaultExt = "txt"
-            };
+            string fileName = ShowSaveDialog("Export data");
 
-            if (SFD.ShowDialog() == true)
+            if (fileName.Length > 0)
             {
                 string a = "";
                 foreach (string element in data)
@@ -315,8 +303,21 @@ namespace FilesMap
                     a += element + "\n";
                 }
 
-                File.WriteAllText(SFD.FileName, a);
+                File.WriteAllText(fileName, a);
             }
+        }
+
+        private string ShowSaveDialog(string title)
+        {
+            SaveFileDialog SFD = new SaveFileDialog
+            {
+                Title = title,
+                RestoreDirectory = true,
+                Filter = "Text files|*.txt|All files|*.*",
+                DefaultExt = "txt"
+            };
+
+            return SFD.ShowDialog() == true ? SFD.FileName : "";
         }
 
         private void Menu_CreateElement_Click(object sender, RoutedEventArgs e)
