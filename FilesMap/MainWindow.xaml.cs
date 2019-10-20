@@ -384,13 +384,13 @@ namespace FilesMap
             {
                 for (int i = 0; i < data.Length; i++)
                 {
-                    if (data[i] == elementToRename)
+                    if (data[i].Contains(elementToRename))
                     {
-                        data[i] = newElementPath;
-                        Navigate(currentPath);
-                        break;
+                        data[i] = data[i].Replace(elementToRename, newElementPath);
                     }
                 }
+
+                Navigate(currentPath);
             }
 
             Grid_CreateElement.Visibility = Visibility.Hidden;
