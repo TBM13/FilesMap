@@ -363,11 +363,12 @@ namespace FilesMap
                 return;
             }
 
-            string newElementPath = currentPath + Txt_CreateElement_Name.Text + Settings.Default.DirSeparator;
+            string newElementPath = currentPath + Txt_CreateElement_Name.Text;
 
             foreach (string element in data)
             {
-                if (element == newElementPath)
+                bool endsWithDirSeparator = element.Remove(0, element.Length - 1) == Settings.Default.DirSeparator;
+                if (element == (endsWithDirSeparator ? newElementPath + Settings.Default.DirSeparator : newElementPath))
                 {
                     MessageBox.Show("The element '" + Txt_CreateElement_Name.Text + "' already exists in this path.", "FilesMap", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
@@ -378,7 +379,7 @@ namespace FilesMap
             {
                 Array.Resize(ref data, data.Length + 1);
                 data[data.Length - 1] = newElementPath;
-                AddTile(newElementPath.Remove(newElementPath.Length - 1, 1));
+                AddTile(newElementPath);
             }
             else
             {
