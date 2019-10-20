@@ -363,7 +363,7 @@ namespace FilesMap
                 return;
             }
 
-            string newElementPath = currentPath + Txt_CreateElement_Name.Text;
+            string newElementPath = currentPath + Txt_CreateElement_Name.Text + Settings.Default.DirSeparator;
 
             foreach (string element in data)
             {
@@ -378,7 +378,7 @@ namespace FilesMap
             {
                 Array.Resize(ref data, data.Length + 1);
                 data[data.Length - 1] = newElementPath;
-                AddTile(newElementPath);
+                AddTile(newElementPath.Remove(newElementPath.Length - 1, 1));
             }
             else
             {
