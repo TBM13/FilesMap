@@ -140,22 +140,7 @@ namespace FilesMap
             contextMenu.Items.Add(separator);
             contextMenu.Items.Add(tile.Source.ToString() == "pack://application:,,,/Images/dir64.png" ? interpretAsAFile : interpretAsAFolder);
 
-            deleteElement.Click += (sender2, e2) =>
-            {
-                if (!Settings.Default.DeleteConfirmation || MessageBox.Show("Are you sure that you want to delete this element?", "FilesMap", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
-                    for (int i = 0; i < data.Length; i++)
-                    {
-                        if (data[i] == _path)
-                        {
-                            data[i] = data[data.Length - 1];
-                            Array.Resize(ref data, data.Length - 1);
-                            Navigate(currentPath);
-                            break;
-                        }
-                    }
-                }
-            };
+            deleteElement.Click += (sender2, e2) => Delete(_path);
 
             renameElement.Click += (sender2, e2) =>
             {
@@ -410,6 +395,36 @@ namespace FilesMap
             }
 
             Image_CreateElement_Icon.Source = GetFileIcon(extension); 
+        }
+
+        private void Delete(string path) //Needs some fixes
+        {
+            if (!Settings.Default.DeleteConfirmation || MessageBox.Show("Are you sure that you want to delete this element?", "FilesMap", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                for (int i = 0; i < data.Length; i++)
+                {
+                    if (data[i].Contains(path))
+                    {
+                        for (int j = 1; (data.Length - j) >= i; j++)
+                        {
+                            if (!data[data.Length - j].Contains(path))
+                            {
+                                data[i] = data[data.Length - j];
+                                break;
+                            }
+                            else
+                            {
+                                Array.Resize(ref data, data.Length - 1);
+                                j -= 1;
+                            }
+                        }
+
+                        Array.Resize(ref data, data.Length - 1);
+                    }
+                }
+
+                Navigate(currentPath);
+            }
         }
     }
 }
