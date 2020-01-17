@@ -13,7 +13,7 @@
             <ScrollViewer x:Name="Tiles_Scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,28">
             <Grid x:Name="TilesContent"/>
         </ScrollViewer>
-        <TextBox x:Name="Textbox_Path" Height="26" VerticalAlignment="Bottom" Margin="71,0,106,1" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="Textbox_Path" Height="26" VerticalAlignment="Bottom" Margin="71,0,106,1" VerticalContentAlignment="Center" KeyDown="Textbox_Path_KeyDown"/>
         <Button Content="Navigate" Height="26" VerticalAlignment="Bottom" Margin="0,0,1,1" HorizontalAlignment="Right" Width="101" Click="Button_Click"/>
         <Button x:Name="Btn_Back" Content="Back" Height="26" VerticalAlignment="Bottom" Margin="2,0,0,1" HorizontalAlignment="Left" Width="66" IsEnabled="False" Click="Btn_Back_Click"/>
         <Grid.ContextMenu>

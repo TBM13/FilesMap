@@ -229,6 +229,11 @@ namespace FilesMap
 #pragma warning restore IDE0060
 
         private void Button_Click(object sender, RoutedEventArgs e) => Navigate(Textbox_Path.Text.Length > 0 ? Textbox_Path.Text : defaultDrive);
+        private void Textbox_Path_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Navigate(Textbox_Path.Text.Length > 0 ? Textbox_Path.Text : defaultDrive);
+        }
 
         private BitmapImage GetFileIcon(string extension, string _path = "")
         {
