@@ -245,6 +245,8 @@ namespace FilesMap
                 extension = "doc";
             else if (extension == "SH" || extension == "CMD")
                 extension = "bat";
+            else if (extension == "URL")
+                extension = "lnk";
 
             if (_path.Length > 0 && forceInterpret.Contains(_path + ";"))
                 extension = extension == "DIR" ? "" : "dir";
